@@ -13,13 +13,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: install dependencies
-        run: npm ci
-      - name: build server
-        run: npm run build
       - uses: cypress-io/github-action@v2
         with:
-          start: npm start
+          start: npm run build
           wait-on: 'http://localhost:3000'
           wait-on-timeout: 60
           record: false
@@ -30,5 +26,5 @@ jobs:
           browser: 'chrome'
           config-file: 'cypress.json'
           config: 'baseUrl=http://localhost:3000'
-          command: 'run'
+          command: 'start'
           working-directory: '.'
