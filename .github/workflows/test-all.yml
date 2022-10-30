@@ -13,18 +13,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: cypress-io/github-action@v2
+      - uses: cypress-io/github-action@v4
         with:
-          start: npm run build
+          build: npm run build
+          start: npm run start
           wait-on: 'http://localhost:3000'
           wait-on-timeout: 60
           record: false
-          parallel: false
-          group: 'GitHub Actions'
-          spec: 'cypress/integration/**/*'
-          env: 'CYPRESS_BASE_URL=http://localhost:3000'
-          browser: 'chrome'
-          config-file: 'cypress.json'
-          config: 'baseUrl=http://localhost:3000'
-          command: 'start'
-          working-directory: '.'
