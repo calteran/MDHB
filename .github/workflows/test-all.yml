@@ -1,0 +1,34 @@
+name: test-all
+on:
+  pull_request:
+    types: [opened, ready_for_review, reopened, synchronize]
+  push:
+    branches:
+      - 'main'
+      - 'develop'
+env:
+    CI: true
+jobs:
+  cypress:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: install dependencies
+        run: npm ci
+      - name: build server
+        run: npm run build
+      - uses: cypress-io/github-action@v2
+        with:
+          start: npm start
+          wait-on: 'http://localhost:3000'
+          wait-on-timeout: 60
+          record: false
+          parallel: false
+          group: 'GitHub Actions'
+          spec: 'cypress/integration/**/*'
+          env: 'CYPRESS_BASE_URL=http://localhost:3000'
+          browser: 'chrome'
+          config-file: 'cypress.json'
+          config: 'baseUrl=http://localhost:3000'
+          command: 'run'
+          working-directory: '.'
