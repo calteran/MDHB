@@ -7,7 +7,7 @@ on:
       - 'main'
       - 'develop'
 env:
-    CI: true
+    NODE_ENV: test
 jobs:
   cypress:
     runs-on: ubuntu-latest
