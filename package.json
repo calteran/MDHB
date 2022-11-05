@@ -13,9 +13,11 @@
     "cy:run": "cypress run"
   },
   "dependencies": {
+    "mysql2": "^2.3.3",
     "next": "13.0.0",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "sequelize": "^6.25.3"
   },
   "devDependencies": {
     "cypress": "^10.11.0",
