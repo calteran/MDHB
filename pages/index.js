@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import {Sequelize} from "sequelize";
+import {select} from "../utils/db";
 
 export default function Home({ pages, title }) {
     return (
@@ -31,19 +31,8 @@ export default function Home({ pages, title }) {
 }
 
 export async function getStaticProps() {
-    const sequelize = new Sequelize({
-        dialect: process.env.DB_TYPE,
-        host: process.env.DB_HOST,
-        port: process.env.DB_PORT,
-        username: process.env.DB_USER,
-        password: process.env.DB_PASS,
-        database: process.env.DB_NAME,
-        logging: false
-    });
-
-    const pages = await sequelize.query(
-        'SELECT path, name FROM pages WHERE enabled = true ORDER BY list_order ASC',
-        { type: sequelize.QueryTypes.SELECT }
+    const pages = await select(
+        'SELECT path, name FROM pages WHERE enabled = true ORDER BY list_order ASC'
     );
 
     return {
