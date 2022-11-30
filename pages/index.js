@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import {select} from "../utils/db";
+import {db} from "../utils/db";
 
 export default function Home({ pages, title }) {
     return (
@@ -16,7 +16,7 @@ export default function Home({ pages, title }) {
                 </h1>
                 <ul>
                     {pages.map(page => (
-                        <li key={page.path}>
+                        <li key={page.id}>
                             <a href={page.path}>{page.name}</a>
                         </li>
                     ))}
@@ -31,9 +31,14 @@ export default function Home({ pages, title }) {
 }
 
 export async function getStaticProps() {
-    const pages = await select(
-        'SELECT path, name FROM pages WHERE enabled = true ORDER BY list_order ASC'
-    );
+    const { Pages } = await db();
+    const pages = await Pages.findAll({
+        attributes: ['id', 'path', 'name'],
+        where: {
+            enabled: true
+        },
+        raw: true,
+    });
 
     return {
         props: {
