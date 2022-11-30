@@ -3,7 +3,7 @@ import {db} from "../utils/db";
 
 export default function Home({ pages, title }) {
     return (
-        <div>
+        <div className={'container mx-auto'}>
             <Head>
                 <title>{title}</title>
                 <meta name="description" content={'Digital House Binder for ' + title} />
@@ -11,10 +11,10 @@ export default function Home({ pages, title }) {
             </Head>
 
             <main>
-                <h1 className="title">
+                <h1 className={'font-sans font-semibold text-2xl'}>
                     Welcome to {title}
                 </h1>
-                <ul>
+                <ul className={'list-none'}>
                     {pages.map(page => (
                         <li key={page.id}>
                             <a href={page.path}>{page.name}</a>
