@@ -14,7 +14,7 @@ describe('[path] pages', () => {
     it('loads for each valid path', () => {
         paths.forEach(path => {
             cy.visit(path.path);
-            cy.get('h1').should('have.text', path.name);
+            cy.get('h3').first().should('have.text', path.name);
         });
     });
 
@@ -29,7 +29,7 @@ describe('[path] pages', () => {
         paths.forEach(path => {
             pageCount++;
             cy.visit(path.path);
-            cy.get('h3').should('have.text', `This is on page ${pageCount}`);
+            cy.get('h3').first().next().should('contain.text', `This is on page ${pageCount}`);
             cy.get('div.mdhb-module').should('have.length', path.modules);
         });
     });
