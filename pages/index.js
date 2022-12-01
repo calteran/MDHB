@@ -1,32 +1,60 @@
-import Head from 'next/head'
 import {db} from "../utils/db";
+import {
+    Box,
+    Container,
+    List,
+    ListItem,
+    ListItemButton,
+    ListItemText,
+    Typography
+} from "@mui/material";
+import Grid from '@mui/material/Unstable_Grid2';
 
 export default function Home({ pages, title }) {
     return (
-        <div>
-            <Head>
-                <title>{title}</title>
-                <meta name="description" content={'Digital House Binder for ' + title} />
-                <link rel="icon" href="/favicon.ico" />
-            </Head>
-
+        <Container>
             <main>
-                <h1 className="title">
+                <Typography variant={'h1'}>
                     Welcome to {title}
-                </h1>
-                <ul>
-                    {pages.map(page => (
-                        <li key={page.id}>
-                            <a href={page.path}>{page.name}</a>
-                        </li>
-                    ))}
-                </ul>
+                </Typography>
+                <Grid container>
+                    <Grid item xs={4}>
+                        <List>
+                            {pages.map(page => (
+                                <ListItem key={page.id}>
+                                    <ListItemButton
+                                        component={'a'}
+                                        href={page.path}
+                                    >
+                                        <ListItemText
+                                            primary={page.name}
+                                            primaryTypographyProps={{
+                                                variant: 'button',
+                                                color: 'primary'
+                                            }}
+                                        />
+                                    </ListItemButton>
+                                </ListItem>
+                            ))}
+                        </List>
+                    </Grid>
+                    <Grid item xs={8}>
+                        <Box>
+                            <img
+                                src={process.env.HOME_IMAGE || '/images/template/cottage.jpg'}
+                                alt={'Home'}
+                                width={'100%'}
+                                style={{borderRadius: '10px'}}
+                            />
+                        </Box>
+                    </Grid>
+                </Grid>
             </main>
 
             <footer>
                 Powered by <a target='_blank' href={'https://www.github.com/calteran/mdhb'} rel="noreferrer">My Digital Home Binder</a>.
             </footer>
-        </div>
+        </Container>
     )
 }
 
