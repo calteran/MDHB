@@ -1,22 +1,24 @@
 import {db} from "../utils/db";
 import {Converter} from "showdown";
+import {Card, CardContent, Container, Stack, Typography} from "@mui/material";
 
 export default function Path ({ page, modules }) {
     // Render each module
     const content = modules.map(module => {
         return (
-            <div key={module.id} className={'mdhb-module'}>
-                <div dangerouslySetInnerHTML={{ __html: module.content }} />
-                <hr />
-            </div>
+            <Card key={module.id} className={'mdhb-module'}>
+                <CardContent dangerouslySetInnerHTML={{ __html: module.content }} />
+            </Card>
         );
     });
 
     return (
-        <div>
-            <h1>{page.name}</h1>
-            {content}
-        </div>
+        <Container>
+            <Typography variant={'h3'}>{page.name}</Typography>
+            <Stack spacing={4}>
+                {content}
+            </Stack>
+        </Container>
     );
 }
 
