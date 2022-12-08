@@ -9,6 +9,7 @@ import {
     Typography
 } from "@mui/material";
 import Grid from '@mui/material/Unstable_Grid2';
+import Image from "next/image";
 
 export default function Home({ pages, title }) {
     return (
@@ -39,11 +40,15 @@ export default function Home({ pages, title }) {
                         </List>
                     </Grid>
                     <Grid item xs={8}>
-                        <Box>
-                            <img
+                        <Box sx={{
+                            position: 'relative',
+                            width: '100%',
+                            height: '100%',
+                        }}>
+                            <Image
                                 src={process.env.HOME_IMAGE || '/images/template/cottage.jpg'}
                                 alt={'Home'}
-                                width={'100%'}
+                                fill={true}
                                 style={{borderRadius: '10px'}}
                             />
                         </Box>
