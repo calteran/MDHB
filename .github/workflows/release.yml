@@ -106,5 +106,5 @@ jobs:
           reviewers: calteran
           assignees: calteran
           branch: release/${{ steps.get_version.outputs.version }}
-          base: master
+          base: main
           delete-branch: true
