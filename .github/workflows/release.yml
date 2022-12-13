@@ -71,7 +71,7 @@ jobs:
       id: get_version
       run: echo ::set-output name=version::$(cat VERSION.md)
     - name: create release branch
-      run: git checkout -b release-${{ steps.get_version.outputs.version }}
+      run: git checkout -b release/${{ steps.get_version.outputs.version }}
     - name: update version
       run: |
         sed -i "s/\"version\": \".*\"/\"version\": \"${{ steps.get_version.outputs.version }}\"/g" package.json
@@ -86,7 +86,7 @@ jobs:
       uses: ad-m/github-push-action@master
       with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: release-${{ steps.get_version.outputs.version }}
+          branch: release/${{ steps.get_version.outputs.version }}
     - name: create pull request
       uses: peter-evans/create-pull-request@v3
       with:
@@ -105,14 +105,6 @@ jobs:
           labels: release
           reviewers: calteran
           assignees: calteran
-          branch: release-${{ steps.get_version.outputs.version }}
+          branch: release/${{ steps.get_version.outputs.version }}
           base: master
           delete-branch: true
-          draft: true
-          allow-empty-commit: false
-          allow-empty-message: false
-          allow-same-message: false
-          auto-merge-method: merge
-          auto-merge-fallback: false
-          auto-merge-retry-count: 0
-          auto-merge-retry-wait: 0
