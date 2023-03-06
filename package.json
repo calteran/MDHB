@@ -28,7 +28,7 @@
   "devDependencies": {
     "cypress": "^12.3.0",
     "eslint": "8.32.0",
-    "eslint-config-next": "13.1.2",
+    "eslint-config-next": "13.2.3",
     "start-server-and-test": "^1.15.2"
   }
 }
